@@ -1,0 +1,11 @@
+obj
+bin
+Logs
+tempkey.jwk
+.vs
+
+# Editor directories and files
+.idea
+.vscode
+.history
+*.sw*
