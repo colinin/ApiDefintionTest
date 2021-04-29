@@ -11,16 +11,18 @@ namespace ApiDefintionTest.Controllers
     [Route("api/app/values")]
     public class ValuesController : AbpController
     {
+        private readonly IJsonSerializer _jsonSerializer;
+        public ValuesController(IJsonSerializer jsonSerializer) => _jsonSerializer = jsonSerializer;
         [HttpGet]
         [Route("{Id}/{Required}")]
         [Route("{Id}/{Required}/{Optional1}")]
         [Route("{Id}/{Required}/{Optional2}")]
         [Route("{Id}/{Required}/{Optional1}/{Optional2}")]
-        public virtual Task<ValueOuputDto> GetAsync(GetValueInput input, [FromServices] IJsonSerializer jsonSerializer)
+        public virtual Task<ValueOuputDto> GetAsync(GetValueInput input)
         {
             var dto = new ValueOuputDto
             {
-                Value = jsonSerializer.Serialize(input)
+                Value = _jsonSerializer.Serialize(input)
             };
 
             return Task.FromResult(dto);
